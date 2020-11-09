@@ -64,9 +64,6 @@ export default {
       isTrans: false,
     };
   },
-
-  mounted() {
-  },
   methods: {
     onTrans() {
       if (this.inputData.trim().length == 0) {
