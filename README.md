@@ -274,8 +274,3 @@ flutter pub run build_runner build
 
 After the execution is complete, the **demo_model.g.dart** file will be generated.
 
-
-
-### The entire execution process is as follows
-
-![//p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8bc6bb3edb75410397af822c881b1316~tplv-k3u1fbpfcp-zoom-1.image](https://tva1.sinaimg.cn/large/0081Kckwgy1gkjw9ym6n1g31qi0qohe1.gif)
