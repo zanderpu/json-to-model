@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="tip">
-      <h1>JSON to Model</h1>
-      <h4>Paste your JSON in the textarea below, click convert and get your Dart classes for free.</h4>
+      <h1>JSON To Model</h1>
+      <h4>Paste your JSON in the textarea below, click Generate and get your Dart classes for free!</h4>
     </div>
     <div class="flex file_name">
       <h4 sytle="flex-shrink:0">ClassName:</h4>
@@ -23,17 +23,11 @@
       <div>
         <div class="translate_btn" @click="onTrans">
           <el-button type="primary"
-            >Go<i
-              :class="[
-                'el-icon-arrow-right',
-                isTrans ? 'el-icon-loading' : 'el-icon--right',
-              ]"
-            ></i
-          ></el-button>
+            >Generate<i class="el-icon-arrow-right el-icon--right"></i></el-button>
         </div>
         <div class="translate_btn" @click="copy">
           <el-button type="success"
-            >Get<i class="el-icon-document-copy el-icon--right"></i
+            >Copy Model<i class="el-icon-document-copy el-icon--right"></i
           ></el-button>
         </div>
       </div>
@@ -72,7 +66,6 @@ export default {
           type: "error",
         });
       }
-      this.isTrans = true;
       try {
         let value = JSON.parse(JSON.parse(JSON.stringify(this.inputData)));
         if (typeof value != "object") {
@@ -84,11 +77,10 @@ export default {
         this.outputData = decode(value, this.input.trim().length == 0 ? 'auto' : this.input);
       } catch (err) {
         return this.$message({
-          message: "JSON Is Not True",
+          message: "JSON DATA ERROR",
           type: "error",
         });
       } finally {
-        this.isTrans = false;
       }
     },
     copy() {
@@ -102,7 +94,7 @@ export default {
       copyText.select();
       document.execCommand("copy");
       this.$message({
-        message: "Copy Success",
+        message: "Copy Model Success",
         type: "success",
       });
     },

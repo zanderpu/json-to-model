@@ -1,11 +1,12 @@
 const baseModelTemplete:string = `
 import 'package:json_annotation/json_annotation.dart';
-part 'index_data.g.dart'; 
+part 'index.g.dart'; 
 
 @JsonSerializable(explicitToJson: true)
 class TempleteModel {
     TempleteData data;
-
+    int code;
+    int message;
     TempleteModel({
       this.data,
       this.code,
@@ -45,7 +46,7 @@ enum BaseDataType  {
 }
 
 let fileName:string = "";
-let chreateChildTemps:string[] = [];
+let createChildTemps:string[] = [];
 
 function isFloat(val:number):boolean{
   if(val === 1){
@@ -88,7 +89,7 @@ function createChildData(className:string, obj:object) {
   let value =`@JsonSerializable(explicitToJson: true) \nclass ${className}{ \n    ${getDataType(
     obj
   )}\n    ${className}({\n    ${getThisInit(obj)}});${getBottomToJson(className)} \n}\n\n `;
-  chreateChildTemps.push(value);
+  createChildTemps.push(value);
 }
 
 function getDataType(obj:object):string {
@@ -150,8 +151,8 @@ function getDataType(obj:object):string {
 
 export default function decodeObj(value, filename:string) {
   fileName = filename;
-  chreateChildTemps = [];
-  let dataResultString:string = `${firstUpperCase(fileName)}Model`;
+  createChildTemps = [];
+  let dataResultString:string = `${firstUpperCase(fileName)}`;
   let dataTypeString:string;
   let isArrayValue:boolean = false;
   if (value.data) {
@@ -175,7 +176,7 @@ export default function decodeObj(value, filename:string) {
     .replace(/ContentToDo/, dataParentType)
     .replace(/thisInit/, getThisInit(value));
 
-  chreateChildTemps.reverse().map((item) => (childTempValue = `${childTempValue}${item}`));
+  createChildTemps.reverse().map((item) => (childTempValue = `${childTempValue}${item}`));
 
   return `${tempResult}${dataParentType}${childTempValue}`;
 }
