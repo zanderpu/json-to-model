@@ -18,6 +18,9 @@ class TempleteModel {
 }
 `;
 const baseModelTempleteData:string = `
+import 'package:json_annotation/json_annotation.dart';
+part 'index.g.dart'; 
+
 @JsonSerializable(explicitToJson: true)
 class TempleteData {
     ContentToDo
@@ -174,10 +177,11 @@ export default function decodeObj(value, filename:string) {
   dataParentType = baseModelTempleteData
     .replace(/TempleteData/g, `${firstUpperCase(fileName)}Data`)
     .replace(/ContentToDo/, dataParentType)
+    .replace(/index/, fileName)
     .replace(/thisInit/, getThisInit(value));
 
   createChildTemps.reverse().map((item) => (childTempValue = `${childTempValue}${item}`));
 
-  return `${tempResult}${dataParentType}${childTempValue}`;
+  return `${dataParentType}${childTempValue}`;
 }
 
